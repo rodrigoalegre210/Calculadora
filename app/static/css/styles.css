@@ -1,0 +1,322 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--background-color);
+}
+
+/* Estilos de la calculadora */
+#calculadora {
+    background-color: var(--calc-background);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    box-sizing: border-box;
+}
+
+/* Contenedor de la pantalla */
+#pantalla-conteiner {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+/* Pantalla superior (operación) */
+#operacion {
+    text-align: right;
+    font-size: 18px;
+    padding: 5px;
+    background-color: var(--screen-background);
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+/* Pantalla inferior (números) */
+#pantalla {
+    text-align: right;
+    font-size: 24px;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    background-color: var(--screen-background);
+    overflow: auto;
+    box-shadow: none;
+    width: 100%;
+    box-sizing: border-box;
+    user-select: none;
+    cursor: default;
+    outline: none;
+}
+
+/* Pantalla secundaria */
+.sub-pantalla {
+    text-align: right;
+    font-size: 18px;
+    color: var(--subscreen-color);
+    padding: 5px;
+    background-color: var(--screen-background);
+    box-shadow: none;
+    margin: 0;
+    border: none;
+    height: 20px;
+    width: 100%;
+}
+
+/* Estilos de los botones */
+#botones {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Cuatro columnas iguales */
+    grid-template-rows: repeat(5, 60px); /* Cinco filas con altura fija */
+    gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilo de los botones */
+#botones button {
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    cursor: pointer;
+}
+
+#botones button:hover {
+    background-color: var(--button-hover-background);
+}
+
+/* Estilo del botón de igual */
+#igual {
+    grid-column: 1 / span 4; /* Ocupa toda la barra de abajo */
+    background-color: var(--equal-button-background);
+    color: var(--button-text-color);
+}
+
+#igual:hover {
+    background-color: var(--equal-button-hover-background);
+}
+
+/* Estilos del contenedor de sugerencias */
+#sugerencia-container {
+    position: fixed;
+    top: 20px;
+    right: 20px; 
+    background-color: var(--sugerencia-background);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+    box-sizing: border-box;
+    width: 400px;
+    min-width: 400px;
+    height: 180px; 
+    min-height: 180px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+}
+
+/* Ajuste del título */
+#sugerencia-container h3 {
+    margin: 0;
+    margin-bottom: 20px; /* Espacio fijo debajo del título */
+}
+
+/* Ajuste del texto */
+#sugerencia-texto {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 20px; /* Espacio fijo debajo del texto */
+    color: var(--texto-sugerencia-color);
+}
+
+/* Ajuste del botón */
+#sugerencia-container button {
+    margin: 0 auto; /* Centra el botón horizontalmente */
+    display: block;
+}
+
+#sugerencia:hover {
+    background-color: var(--button-hover-background);
+}
+
+/* Estilos del historial */
+.historial {
+    position: fixed;
+    top: 220px;
+    right: 20px;
+    font-family: Arial, sans-serif;
+    background-color: var(--historial-background);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 400px;
+    min-width: 400px;
+    height: 300px; /* Ajusta la altura según sea necesario */
+    bottom: 60px;
+    overflow: hidden; /* Oculta el contenido que se desborda */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column-reverse; /* Muestra los registros más recientes en la parte inferior */
+}
+
+.historial ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.historial li {
+    background-color: var(--historial-item-background);
+    color: var(--historial-item-text-color);
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    animation: slideIn 0.5s ease-out; /* Añade animación de entrada */
+}
+
+@keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Animación para desplazar registros existentes */
+  @keyframes slide-down {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+  
+  /* Clase para el nuevo registro */
+  .new-record {
+    animation: slide-in 0.5s forwards;
+  }
+  
+  /* Clase para los registros existentes */
+  .existing-record {
+    animation: slide-down 0.5s forwards;
+  }
+
+.historial h3 {
+    text-align: center;
+    margin: 20px 0 10px 0;
+}
+
+/* Estilos del interruptor de tema */
+#switch-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+#toggle-tema {
+    width: 40px; /* Tamaño del interruptor */
+    height: 20px; /* Tamaño del interruptor */
+    background-color: var(--toggle-slider-background); /* Color del fondo del interruptor */
+    border-radius: 50px; /* Bordes redondeados para hacer un interruptor corredizo */
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#toggle-tema::before {
+    content: '';
+    width: 18px; /* Tamaño del círculo */
+    height: 18px; /* Tamaño del círculo */
+    background-color: #fff; /* Color del círculo */
+    border-radius: 50%; /* Redondear el círculo */
+    position: absolute;
+    top: 1px; /* Espacio desde la parte superior del interruptor */
+    left: 1px; /* Espacio desde la parte izquierda del interruptor */
+    transition: transform 0.3s;
+}
+
+body[data-theme='dark'] #toggle-tema {
+    background-color: var(--toggle-slider-active-background); /* Cambia el color del interruptor en modo oscuro */
+}
+
+body[data-theme='dark'] #toggle-tema::before {
+    transform: translateX(20px); /* Mueve el círculo hacia la derecha en modo oscuro */
+}
+
+/* Estilos del pie de página */
+footer {
+    background-color: var(--footer-background);
+    color: var(--footer-text-color);
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+/* Variables de colores para el tema claro y oscuro */
+:root {
+    --background-color: #f0f0f0;
+    --calc-background: #fff;
+    --subscreen-color: #666;
+    --screen-background: #d0d0d0;
+    --border-color: #ccc;
+    --button-background: #ACAF50;
+    --button-text-color: #fff;
+    --button-hover-background: #45a049;
+    --equal-button-background: #FF9800;
+    --equal-button-hover-background: #e68900;
+    --sugerencia-background: #f8f8f8;
+    --historial-background: #fff;
+    --toggle-slider-background: #ACAF50; /* Verde lima para el modo claro */
+    --toggle-slider-active-background: #4caf50; /* Verde oscuro para el modo oscuro */
+    --footer-background: #000;
+    --footer-text-color: #fff;
+    --texto-sugerencia-color: #333;
+}
+
+/* Modo oscuro */
+body[data-theme="dark"] {
+    --background-color: #1e1e1e;
+    --calc-background: #2b2b2b;
+    --subscreen-color: #a0a0a0;
+    --screen-background: #333;
+    --border-color: #555;
+    --button-background: #5a5a5a;
+    --button-text-color: #fff;
+    --button-hover-background: #3a3a3a;
+    --equal-button-background: #ff5722;
+    --equal-button-hover-background: #e64a19;
+    --sugerencia-background: #2b2b2b;
+    --historial-background: #2b2b2b;
+    --toggle-slider-background: #a0a0a0; /* Color del interruptor en modo oscuro */
+    --toggle-slider-active-background: #a0a0a0; /* Color del interruptor en modo oscuro */
+    --footer-background: #444;
+    --footer-text-color: #fff;
+    --texto-sugerencia-color: #a0a0a0;
+}

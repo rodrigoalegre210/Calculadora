@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewpoint" content = "width = device-width, initial-scale = 1.0">
+    <title>Calculadora.IA</title>
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/styles.css') }}">
+</head>
+<body>
+    <div id = "calculadora">
+        <div id = "pantalla-conteiner">
+            <div id = "operacion" class = "sub-pantalla"></div>
+            <input type = "text" id = "pantalla" readonly>
+        </div>
+
+        <!-- Botones de la calculadora -->
+        <div id = "botones">
+            <!-- Primera fila -->
+            <button onclick = "agregarAPantalla('7')">7</button>
+            <button onclick = "agregarAPantalla('8')">8</button>
+            <button onclick = "agregarAPantalla('9')">9</button>
+            <button onclick = "agregarAPantalla('/')">/</button>
+
+            <!-- Segunda fila -->
+            <button onclick = "agregarAPantalla('4')">4</button>
+            <button onclick = "agregarAPantalla('5')">5</button>
+            <button onclick = "agregarAPantalla('6')">6</button>
+            <button onclick = "agregarAPantalla('*')">*</button>
+
+            <!-- Tercera fila -->
+            <button onclick = "agregarAPantalla('1')">1</button>
+            <button onclick = "agregarAPantalla('2')">2</button>
+            <button onclick = "agregarAPantalla('3')">3</button>
+            <button onclick = "agregarAPantalla('-')">-</button>
+
+            <!-- Segunda fila -->
+            <button onclick = "limpiarPantalla()">C</button>
+            <button onclick = "agregarAPantalla('0')">0</button>
+            <button onclick = "agregarAPantalla('.')">.</button>
+            <button onclick = "agregarAPantalla('+')">+</button>
+
+            <!-- Quinta fila-->
+            <button onclick = "calcular()" id = "igual">=</button>
+        </div>
+    </div>
+
+    <!-- Contenedor para mostrar sugerencia -->
+     <div id = "sugerencia-container">
+        <h3>Sugerencia de cálculo</h3>
+        <p id = "sugerencia-texto">Haz clic en "Sugerir Cálculo" para obtener una sugerencia.</p>
+        <button onclick = "mostrarSugerencia()" id = "sugerencia">Sugerir Cálculo</button>
+     </div>
+
+    <!-- Historial de cálculos -->
+    <div class = "historial">
+        <h3>Historial de cálculos</h3>
+        <ul id = "historial">
+            {% for item in historial %}
+                <li>{{ item['expresion'] }} = {{ item['resultado'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="switch-container">
+        <div id="toggle-tema"></div>
+    </div>
+
+    <footer>
+        Desarrollado por Rodrigo Alegre
+    </footer>
+
+    <script src = "{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
